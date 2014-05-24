@@ -119,4 +119,9 @@ public class DataAccessServiceImpl implements DataAccessService {
 	public ProductCategory saveProductCategory(final ProductCategory category) {
 		return productCategoryRepository.save(category);
 	}
+
+	@Override
+	public ProductCategory findProductCategoryById(final Long id) {
+		return productCategoryRepository.findById(id);
+	}
 }

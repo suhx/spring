@@ -9,13 +9,13 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ItemRepository extends CrudRepository<Item, Long> {
 
-	public List<Item> findByCategory(ProductCategory category);
+	List<Item> findByCategory(ProductCategory category);
 
-	public List<Item> findByPriceLessThan(BigDecimal price);
+	List<Item> findByPriceLessThan(BigDecimal price);
 
-	public List<Item> findByPrice(BigDecimal price);
+	List<Item> findByPrice(BigDecimal price);
 
-	public List<Item> findByPriceGreaterThan(BigDecimal price);
+	List<Item> findByPriceGreaterThan(BigDecimal price);
 
-	public List<Item> findByShortDescriptionContaining(String shortDescription);
+	List<Item> findByShortDescriptionContaining(String shortDescription);
 }

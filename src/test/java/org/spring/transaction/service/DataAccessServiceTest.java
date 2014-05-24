@@ -41,7 +41,7 @@ public class DataAccessServiceTest {
 	private ProductCategoryEnum categoryEnumElectronis;
 
 	@Before
-	public void beforeClass() {
+	public void beforeTest() {
 		this.mailAddress = new MailAddress(mailAddressString);
 		this.mailAddress1 = new MailAddress(mailAddressString1);
 		this.address = new Address("street", 8, "zip", "city", "country");
@@ -75,8 +75,9 @@ public class DataAccessServiceTest {
 	}
 
 	@Test
-	public void testSaveProductCategory() {
+	public void testFindProductCategoryById() {
 		ProductCategory savedCategory = dataAccessService.saveProductCategory(category);
+		ProductCategory foundCategory = dataAccessService.findProductCategoryById(savedCategory.getId());
 	}
 	//
 	// @Test

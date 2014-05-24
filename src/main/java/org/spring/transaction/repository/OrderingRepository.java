@@ -9,12 +9,12 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface OrderingRepository extends CrudRepository<Ordering, Long> {
 
-	public List<Ordering> findByCustomer(Customer customer);
+	List<Ordering> findByCustomer(Customer customer);
 
-	public List<Ordering> findByDateLessThan(LocalDate date);
+	List<Ordering> findByDateLessThan(LocalDate date);
 
-	public List<Ordering> findByDateGreaterThan(LocalDate date);
+	List<Ordering> findByDateGreaterThan(LocalDate date);
 
-	public List<Ordering> findByDate(LocalDate date);
+	List<Ordering> findByDate(LocalDate date);
 
 }

@@ -53,4 +53,6 @@ public interface DataAccessService {
 
 	public ProductCategory saveProductCategory(ProductCategory category);
 
+	public ProductCategory findProductCategoryById(Long id);
+
 }
