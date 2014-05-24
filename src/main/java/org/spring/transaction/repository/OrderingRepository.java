@@ -11,10 +11,10 @@ public interface OrderingRepository extends CrudRepository<Ordering, Long> {
 
 	List<Ordering> findByCustomer(Customer customer);
 
-	List<Ordering> findByDateLessThan(LocalDate date);
+	List<Ordering> findByOrderDateLessThan(LocalDate orderDate);
 
-	List<Ordering> findByDateGreaterThan(LocalDate date);
+	List<Ordering> findByOrderDateGreaterThan(LocalDate orderDate);
 
-	List<Ordering> findByDate(LocalDate date);
+	List<Ordering> findByOrderDate(LocalDate orderDate);
 
 }

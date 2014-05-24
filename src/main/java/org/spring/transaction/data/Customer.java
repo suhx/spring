@@ -1,7 +1,6 @@
 package org.spring.transaction.data;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDate;
 import org.springframework.util.Assert;
 
 @Entity
@@ -30,14 +31,15 @@ public class Customer {
 	@Column(name = "last_name", nullable = false)
 	private String lastName;
 
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
 	@Column(name = "birth_date")
-	private Date birthDate;
+	private LocalDate birthDate;
 
 	@OneToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private MailAddress mailAddress;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<Address> addresseList = new ArrayList<Address>();
+	private List<Address> addressList = new ArrayList<Address>();
 
 	@Column
 	private Integer rating;
@@ -86,22 +88,22 @@ public class Customer {
 		return this;
 	}
 
-	public Date getBirthDate() {
+	public LocalDate getBirthDate() {
 		return birthDate;
 	}
 
-	public Customer setBirthDate(final Date birthDate) {
+	public Customer setBirthDate(final LocalDate birthDate) {
 		this.birthDate = birthDate;
 		return this;
 	}
 
-	public List<Address> getAddresseList() {
-		return this.addresseList;
+	public List<Address> getAddressList() {
+		return this.addressList;
 	}
 
 	public Customer addAddress(final Address address) {
 		Assert.notNull(address);
-		this.addresseList.add(address);
+		this.addressList.add(address);
 		return this;
 	}
 
@@ -135,7 +137,7 @@ public class Customer {
 		if (rating != customer.rating) {
 			return false;
 		}
-		if (!addresseList.equals(customer.addresseList)) {
+		if (!addressList.equals(customer.addressList)) {
 			return false;
 		}
 		if (!birthDate.equals(customer.birthDate)) {
@@ -155,7 +157,7 @@ public class Customer {
 		int result = firstName.hashCode();
 		result = 31 * result + lastName.hashCode();
 		result = 31 * result + birthDate.hashCode();
-		result = 31 * result + addresseList.hashCode();
+		result = 31 * result + addressList.hashCode();
 		result = 31 * result + rating;
 		return result;
 	}
@@ -163,6 +165,6 @@ public class Customer {
 	@Override
 	public String toString() {
 		return "Customer{" + "firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", birthDate="
-				+ birthDate + ", addresses=" + addresseList + ", rating=" + rating + '}';
+				+ birthDate + ", addresses=" + addressList + ", rating=" + rating + '}';
 	}
 }

@@ -68,18 +68,18 @@ public class DataAccessServiceImpl implements DataAccessService {
 	}
 
 	@Override
-	public List<Ordering> findOrderingsByDateLessThan(final LocalDate date) {
-		return orderingRepository.findByDateLessThan(date);
+	public List<Ordering> findOrderingsByOrderDateLessThan(final LocalDate orderDate) {
+		return orderingRepository.findByOrderDateLessThan(orderDate);
 	}
 
 	@Override
-	public List<Ordering> findOrderingsByDateGreaterThan(final LocalDate date) {
-		return orderingRepository.findByDateGreaterThan(date);
+	public List<Ordering> findOrderingsByOrderDateGreaterThan(final LocalDate orderDate) {
+		return orderingRepository.findByOrderDateGreaterThan(orderDate);
 	}
 
 	@Override
-	public List<Ordering> findOrderingsByDate(final LocalDate date) {
-		return orderingRepository.findByDate(date);
+	public List<Ordering> findOrderingsByOrderDate(final LocalDate orderDate) {
+		return orderingRepository.findByOrderDate(orderDate);
 	}
 
 	/**

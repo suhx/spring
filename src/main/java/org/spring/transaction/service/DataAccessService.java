@@ -25,11 +25,11 @@ public interface DataAccessService {
 	 * Ordering
 	 */
 
-	public List<Ordering> findOrderingsByDateLessThan(LocalDate date);
+	public List<Ordering> findOrderingsByOrderDateLessThan(LocalDate orderDate);
 
-	public List<Ordering> findOrderingsByDateGreaterThan(LocalDate date);
+	public List<Ordering> findOrderingsByOrderDateGreaterThan(LocalDate orderDate);
 
-	public List<Ordering> findOrderingsByDate(LocalDate date);
+	public List<Ordering> findOrderingsByOrderDate(LocalDate orderDate);
 
 	public List<Ordering> findOrderingsByCustomer(Customer customer);
 

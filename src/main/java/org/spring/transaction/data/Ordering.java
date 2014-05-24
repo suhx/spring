@@ -33,7 +33,8 @@ public class Ordering {
 	private BigDecimal discount;
 
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
-	private LocalDate date;
+	@Column(name = "order_date")
+	private LocalDate orderDate;
 
 	@ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Customer customer;
@@ -120,6 +121,15 @@ public class Ordering {
 
 	public Ordering setCustomer(final Customer customer) {
 		this.customer = customer;
+		return this;
+	}
+
+	public LocalDate getOrderDate() {
+		return orderDate;
+	}
+
+	public Ordering setOrderDate(final LocalDate orderDate) {
+		this.orderDate = orderDate;
 		return this;
 	}
 }

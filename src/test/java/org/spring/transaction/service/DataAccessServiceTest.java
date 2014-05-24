@@ -1,8 +1,8 @@
 package org.spring.transaction.service;
 
-import java.util.Date;
 import java.util.List;
 
+import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,7 +29,7 @@ public class DataAccessServiceTest {
 	private String firstName = "firstName";
 	private String firstName1 = "firstName1";
 	private String lastName = "lastName";
-	private Date birthDate = new Date();
+	private LocalDate birthDate = new LocalDate();
 	private Integer rating = 8;
 	private Address address;
 	private Address address1;
@@ -63,7 +63,7 @@ public class DataAccessServiceTest {
 		Customer savedCustomer = dataAccessService.saveCustomer(this.customer);
 		Customer foundCustomer = dataAccessService.findCustomerById(savedCustomer.getId());
 		Assert.isTrue(foundCustomer.getMailAddress().equals(customer.getMailAddress()));
-		Assert.isTrue(foundCustomer.getAddresseList().size() == 2);
+		Assert.isTrue(foundCustomer.getAddressList().size() == 2);
 	}
 
 	@Test
@@ -78,13 +78,14 @@ public class DataAccessServiceTest {
 
 	@Test
 	public void testFindOrderingsByCustomer() {
-		Customer foundCustomer = dataAccessService.findCustomerById(1L);
+		Customer foundCustomer = dataAccessService.findCustomerById(2L);
 		List<Ordering> orderingList = dataAccessService.findOrderingsByCustomer(foundCustomer);
+		Assert.isTrue(orderingList.size() == 3);
 	}
-	//
+
 	// @Test
 	// public void testFindOrderingByDateLessThan() {
-	// fail("Not yet implemented");
+	// dataAccessService
 	// }
 	//
 	// @Test
