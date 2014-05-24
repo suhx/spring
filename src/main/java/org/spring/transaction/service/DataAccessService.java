@@ -25,27 +25,27 @@ public interface DataAccessService {
 	 * Ordering
 	 */
 
-	public List<Ordering> findOrderingByDateLessThan(LocalDate date);
+	public List<Ordering> findOrderingsByDateLessThan(LocalDate date);
 
-	public List<Ordering> findOrderingByDateGreaterThan(LocalDate date);
+	public List<Ordering> findOrderingsByDateGreaterThan(LocalDate date);
 
-	public List<Ordering> findOrderingByDate(LocalDate date);
+	public List<Ordering> findOrderingsByDate(LocalDate date);
 
-	public List<Ordering> findOrderingByCustomer(Customer customer);
+	public List<Ordering> findOrderingsByCustomer(Customer customer);
 
 	/**
 	 * Item
 	 */
 
-	public List<Item> findItemByCategory(ProductCategory category);
+	public List<Item> findItemsByCategory(ProductCategory category);
 
-	public List<Item> findItemByPriceGreaterThan(BigDecimal price);
+	public List<Item> findItemsByPriceGreaterThan(BigDecimal price);
 
-	public List<Item> findItemByPriceLessThan(BigDecimal price);
+	public List<Item> findItemsByPriceLessThan(BigDecimal price);
 
-	public List<Item> findItemByPrice(BigDecimal price);
+	public List<Item> findItemsByPrice(BigDecimal price);
 
-	public List<Item> findItemByShortDescriptionContaining(String shortDescription);
+	public List<Item> findItemsByShortDescriptionContaining(String shortDescription);
 
 	/**
 	 * ProductCategory

@@ -63,22 +63,22 @@ public class DataAccessServiceImpl implements DataAccessService {
 	 */
 
 	@Override
-	public List<Ordering> findOrderingByCustomer(final Customer customer) {
+	public List<Ordering> findOrderingsByCustomer(final Customer customer) {
 		return orderingRepository.findByCustomer(customer);
 	}
 
 	@Override
-	public List<Ordering> findOrderingByDateLessThan(final LocalDate date) {
+	public List<Ordering> findOrderingsByDateLessThan(final LocalDate date) {
 		return orderingRepository.findByDateLessThan(date);
 	}
 
 	@Override
-	public List<Ordering> findOrderingByDateGreaterThan(final LocalDate date) {
+	public List<Ordering> findOrderingsByDateGreaterThan(final LocalDate date) {
 		return orderingRepository.findByDateGreaterThan(date);
 	}
 
 	@Override
-	public List<Ordering> findOrderingByDate(final LocalDate date) {
+	public List<Ordering> findOrderingsByDate(final LocalDate date) {
 		return orderingRepository.findByDate(date);
 	}
 
@@ -87,27 +87,27 @@ public class DataAccessServiceImpl implements DataAccessService {
 	 */
 
 	@Override
-	public List<Item> findItemByCategory(final ProductCategory category) {
+	public List<Item> findItemsByCategory(final ProductCategory category) {
 		return itemRepository.findByCategory(category);
 	}
 
 	@Override
-	public List<Item> findItemByPriceGreaterThan(final BigDecimal price) {
+	public List<Item> findItemsByPriceGreaterThan(final BigDecimal price) {
 		return itemRepository.findByPriceGreaterThan(price);
 	}
 
 	@Override
-	public List<Item> findItemByPriceLessThan(final BigDecimal price) {
+	public List<Item> findItemsByPriceLessThan(final BigDecimal price) {
 		return itemRepository.findByPriceLessThan(price);
 	}
 
 	@Override
-	public List<Item> findItemByPrice(final BigDecimal price) {
+	public List<Item> findItemsByPrice(final BigDecimal price) {
 		return itemRepository.findByPrice(price);
 	}
 
 	@Override
-	public List<Item> findItemByShortDescriptionContaining(final String shortDescription) {
+	public List<Item> findItemsByShortDescriptionContaining(final String shortDescription) {
 		return itemRepository.findByShortDescriptionContaining(shortDescription);
 	}
 

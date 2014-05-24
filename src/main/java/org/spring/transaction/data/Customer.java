@@ -24,22 +24,22 @@ public class Customer {
 	@GeneratedValue
 	private Long id;
 
-	@Column(name = "first_name")
+	@Column(name = "first_name", nullable = false)
 	private String firstName;
 
-	@Column(name = "last_name")
+	@Column(name = "last_name", nullable = false)
 	private String lastName;
 
 	@Column(name = "birth_date")
 	private Date birthDate;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private MailAddress mailAddress;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<Address> addresses = new ArrayList<Address>();
+	private List<Address> addresseList = new ArrayList<Address>();
 
-	@Column(name = "rating")
+	@Column
 	private Integer rating;
 
 	/**
@@ -60,7 +60,7 @@ public class Customer {
 	}
 
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	public Customer setId(final Long id) {
@@ -78,7 +78,7 @@ public class Customer {
 	}
 
 	public String getLastName() {
-		return lastName;
+		return this.lastName;
 	}
 
 	public Customer setLastName(final String lastName) {
@@ -95,13 +95,13 @@ public class Customer {
 		return this;
 	}
 
-	public List<Address> getAddresses() {
-		return addresses;
+	public List<Address> getAddresseList() {
+		return this.addresseList;
 	}
 
-	public Customer add(final Address address) {
+	public Customer addAddress(final Address address) {
 		Assert.notNull(address);
-		this.addresses.add(address);
+		this.addresseList.add(address);
 		return this;
 	}
 
@@ -135,7 +135,7 @@ public class Customer {
 		if (rating != customer.rating) {
 			return false;
 		}
-		if (!addresses.equals(customer.addresses)) {
+		if (!addresseList.equals(customer.addresseList)) {
 			return false;
 		}
 		if (!birthDate.equals(customer.birthDate)) {
@@ -155,15 +155,14 @@ public class Customer {
 		int result = firstName.hashCode();
 		result = 31 * result + lastName.hashCode();
 		result = 31 * result + birthDate.hashCode();
-		result = 31 * result + addresses.hashCode();
+		result = 31 * result + addresseList.hashCode();
 		result = 31 * result + rating;
 		return result;
 	}
 
 	@Override
 	public String toString() {
-		return "Customer{" + "firstName='" + firstName + '\'' + ", lastName='" + lastName + '\''
-				+ ", birthDate=" + birthDate + ", addresses=" + addresses + ", rating=" + rating
-				+ '}';
+		return "Customer{" + "firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", birthDate="
+				+ birthDate + ", addresses=" + addresseList + ", rating=" + rating + '}';
 	}
 }

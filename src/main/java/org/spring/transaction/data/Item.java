@@ -17,17 +17,29 @@ public class Item {
 	@GeneratedValue
 	private Long id;
 
-	@ManyToOne
+	@ManyToOne(optional = false)
 	private ProductCategory category;
 
-	@Column(name = "short_description")
+	@Column(name = "short_description", nullable = false)
 	private String shortDescription;
 
-	@Column(name = "long_description")
+	@Column(name = "long_description", nullable = false)
 	private String longDescription;
 
-	@Column(name = "price")
+	@Column(name = "price", nullable = false)
 	private BigDecimal price;
+
+	protected Item() {
+	}
+
+	public Item(final ProductCategory category, final String shortDescription, final String longDescription,
+			final BigDecimal price) {
+		super();
+		this.category = category;
+		this.shortDescription = shortDescription;
+		this.longDescription = longDescription;
+		this.price = price;
+	}
 
 	public Long getId() {
 		return id;

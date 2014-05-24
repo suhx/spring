@@ -22,12 +22,12 @@ public class MailAddress {
 
 	private static final Pattern PATTERN = Pattern.compile(EMAIL_REGEX);
 
-	@Column(unique = true)
-	private String value;
+	@Column(name = "mail_address", unique = true, nullable = false)
+	private String mailAddress;
 
 	public MailAddress(final String mailAddress) {
 		Assert.isTrue(isValid(mailAddress));
-		this.value = mailAddress;
+		this.mailAddress = mailAddress;
 	}
 
 	protected MailAddress() {
@@ -48,7 +48,7 @@ public class MailAddress {
 
 	@Override
 	public String toString() {
-		return value;
+		return mailAddress;
 	}
 
 	@Override
@@ -60,11 +60,11 @@ public class MailAddress {
 			return false;
 		}
 		final MailAddress that = (MailAddress) obj;
-		return this.value.equals(that.value);
+		return this.mailAddress.equals(that.mailAddress);
 	}
 
 	@Override
 	public int hashCode() {
-		return value.hashCode();
+		return mailAddress.hashCode();
 	}
 }

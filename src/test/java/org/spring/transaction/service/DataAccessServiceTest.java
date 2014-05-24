@@ -46,9 +46,9 @@ public class DataAccessServiceTest {
 		this.mailAddress1 = new MailAddress(mailAddressString1);
 		this.address = new Address("street", 8, "zip", "city", "country");
 		this.address1 = new Address("street", 9, "zip", "city", "country");
-		this.customer = new Customer(firstName, lastName).setBirthDate(birthDate).add(address).add(address1)
-				.setMailAddress(mailAddress).setRating(rating);
-		this.customer1 = new Customer(firstName, lastName).setBirthDate(birthDate).add(address)
+		this.customer = new Customer(firstName, lastName).setBirthDate(birthDate).addAddress(address)
+				.addAddress(address1).setMailAddress(mailAddress).setRating(rating);
+		this.customer1 = new Customer(firstName, lastName).setBirthDate(birthDate).addAddress(address)
 				.setMailAddress(mailAddress1).setRating(rating);
 		this.categoryEnumClothes = ProductCategoryEnum.CLOTHES;
 		this.categoryEnumElectronis = ProductCategoryEnum.ELECTRONICS;
@@ -61,7 +61,7 @@ public class DataAccessServiceTest {
 		Customer savedCustomer = dataAccessService.saveCustomer(this.customer);
 		Customer foundCustomer = dataAccessService.findCustomerById(savedCustomer.getId());
 		Assert.isTrue(foundCustomer.getMailAddress().equals(customer.getMailAddress()));
-		Assert.isTrue(foundCustomer.getAddresses().size() == 2);
+		Assert.isTrue(foundCustomer.getAddresseList().size() == 2);
 	}
 
 	@Test
@@ -74,15 +74,10 @@ public class DataAccessServiceTest {
 		Assert.isTrue(savedCustomer.getId().equals(foundCustomer.getId()));
 	}
 
-	@Test
-	public void testFindProductCategoryById() {
-		ProductCategory savedCategory = dataAccessService.saveProductCategory(category);
-		ProductCategory foundCategory = dataAccessService.findProductCategoryById(savedCategory.getId());
-	}
-	//
 	// @Test
-	// public void testFindOrderingByCustomer() {
-	// fail("Not yet implemented");
+	// public void testFindOrderingsByCustomer() {
+	// List<Ordering> orderingList =
+	// dataAccessService.findOrderingsByCustomer(this.customer);
 	// }
 	//
 	// @Test

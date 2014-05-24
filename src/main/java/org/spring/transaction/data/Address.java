@@ -16,26 +16,26 @@ public class Address {
 	@GeneratedValue
 	private Long id;
 
-	@Column
+	@Column(nullable = false)
 	private String street;
 
 	@Column(name = "additional_address_info")
 	private String additionalAddressInfo;
 
-	@Column(name = "postal_code")
+	@Column(name = "postal_code", nullable = false)
 	private String postalCode;
 
-	@Column
+	@Column(nullable = false)
 	private String city;
 
-	@Column
+	@Column(nullable = false)
 	private String country;
 
-	@Column
+	@Column(nullable = false)
 	private int number;
 
-	public Address(final String street, final int number, final String postalCode,
-			final String city, final String country) {
+	public Address(final String street, final int number, final String postalCode, final String city,
+			final String country) {
 		Assert.hasText(street);
 		Assert.hasText(postalCode);
 		Assert.hasText(city);
@@ -117,8 +117,7 @@ public class Address {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((additionalAddressInfo == null) ? 0 : additionalAddressInfo.hashCode());
+		result = prime * result + ((additionalAddressInfo == null) ? 0 : additionalAddressInfo.hashCode());
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + number;
@@ -182,8 +181,7 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return "Adress [street=" + street + ", number=" + number + ", additionalAddressInfo="
-				+ additionalAddressInfo + ", postalCode=" + postalCode + ", city=" + city
-				+ ", country=" + country + "]";
+		return "Adress [street=" + street + ", number=" + number + ", additionalAddressInfo=" + additionalAddressInfo
+				+ ", postalCode=" + postalCode + ", city=" + city + ", country=" + country + "]";
 	}
 }

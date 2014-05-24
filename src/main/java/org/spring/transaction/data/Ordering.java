@@ -4,8 +4,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -24,7 +26,7 @@ public class Ordering {
 	@GeneratedValue
 	private Long id;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	private List<Item> items = new ArrayList<Item>();
 
 	@Column
@@ -33,7 +35,7 @@ public class Ordering {
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
 	private LocalDate date;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Customer customer;
 
 	public Ordering(final Customer customer, final List<Item> items) {
@@ -48,8 +50,7 @@ public class Ordering {
 
 	@Override
 	public String toString() {
-		return "Order{" + "items=" + items + ", discount=" + discount + ", customer=" + customer
-				+ '}';
+		return "Order{" + "items=" + items + ", discount=" + discount + ", customer=" + customer + '}';
 	}
 
 	@Override
