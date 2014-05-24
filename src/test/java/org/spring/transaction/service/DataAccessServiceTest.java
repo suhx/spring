@@ -1,6 +1,7 @@
 package org.spring.transaction.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -8,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.spring.transaction.data.Address;
 import org.spring.transaction.data.Customer;
 import org.spring.transaction.data.MailAddress;
+import org.spring.transaction.data.Ordering;
 import org.spring.transaction.data.ProductCategory;
 import org.spring.transaction.enumeration.ProductCategoryEnum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,11 +76,11 @@ public class DataAccessServiceTest {
 		Assert.isTrue(savedCustomer.getId().equals(foundCustomer.getId()));
 	}
 
-	// @Test
-	// public void testFindOrderingsByCustomer() {
-	// List<Ordering> orderingList =
-	// dataAccessService.findOrderingsByCustomer(this.customer);
-	// }
+	@Test
+	public void testFindOrderingsByCustomer() {
+		Customer foundCustomer = dataAccessService.findCustomerById(1L);
+		List<Ordering> orderingList = dataAccessService.findOrderingsByCustomer(foundCustomer);
+	}
 	//
 	// @Test
 	// public void testFindOrderingByDateLessThan() {

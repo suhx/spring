@@ -35,7 +35,7 @@ public class Ordering {
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
 	private LocalDate date;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Customer customer;
 
 	public Ordering(final Customer customer, final List<Item> items) {
