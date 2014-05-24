@@ -28,12 +28,6 @@ public class DataAccessServiceTest {
 	private Address address = new Address("street", 8, "zip", "city", "country");
 	private Address address1 = new Address("street", 9, "zip", "city", "country");
 
-	// @Before
-	// public void before() {
-	// GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
-	// ctx.load("classpath:spring/applicationContext.xml");
-	// }
-
 	@Test
 	public void saveCustomerTest() {
 		Customer customer = new Customer(firstName, lastName).setBirthDate(birthDate).add(address)
@@ -41,6 +35,7 @@ public class DataAccessServiceTest {
 		Customer savedCustomer = dataAccessService.saveCustomer(customer);
 		Customer foundCustomer = dataAccessService.findCustomerById(savedCustomer.getId());
 		Assert.isTrue(foundCustomer.getMailAddress().equals(customer.getMailAddress()));
+		Assert.isTrue(foundCustomer.getAddresses().size() == 2);
 	}
 
 	@Test

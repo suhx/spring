@@ -1,5 +1,6 @@
 package org.spring.transaction.data;
 
+
 public enum ProductCategory {
 
 	CLOTHES("clothes & more"), ELECTRONICS("electronics & stuff"), MISC("all the rest.");
