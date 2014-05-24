@@ -17,8 +17,8 @@ import org.joda.time.LocalDate;
 import org.springframework.util.Assert;
 
 @Entity
-@Table(name = "order")
-public class Order {
+@Table(name = "ordering")
+public class Ordering {
 
 	@Id
 	@GeneratedValue
@@ -36,14 +36,14 @@ public class Order {
 	@ManyToOne
 	private Customer customer;
 
-	public Order(final Customer customer, final List<Item> items) {
+	public Ordering(final Customer customer, final List<Item> items) {
 		Assert.notNull(customer);
 		Assert.notEmpty(items);
 		this.customer = customer;
 		this.items = items;
 	}
 
-	protected Order() {
+	protected Ordering() {
 	}
 
 	@Override
@@ -57,20 +57,20 @@ public class Order {
 		if (this == o) {
 			return true;
 		}
-		if (!(o instanceof Order)) {
+		if (!(o instanceof Ordering)) {
 			return false;
 		}
 		if (!super.equals(o)) {
 			return false;
 		}
-		final Order order = (Order) o;
-		if (!customer.equals(order.customer)) {
+		final Ordering ordering = (Ordering) o;
+		if (!customer.equals(ordering.customer)) {
 			return false;
 		}
-		if (!discount.equals(order.discount)) {
+		if (!discount.equals(ordering.discount)) {
 			return false;
 		}
-		if (!items.equals(order.items)) {
+		if (!items.equals(ordering.items)) {
 			return false;
 		}
 		return true;
@@ -89,7 +89,7 @@ public class Order {
 		return id;
 	}
 
-	public Order setId(final Long id) {
+	public Ordering setId(final Long id) {
 		this.id = id;
 		return this;
 	}
@@ -98,7 +98,7 @@ public class Order {
 		return items;
 	}
 
-	public Order addItem(final Item item) {
+	public Ordering addItem(final Item item) {
 		Assert.notNull(item);
 		this.items.add(item);
 		return this;
@@ -108,7 +108,7 @@ public class Order {
 		return discount;
 	}
 
-	public Order setDiscount(final BigDecimal discount) {
+	public Ordering setDiscount(final BigDecimal discount) {
 		this.discount = discount;
 		return this;
 	}
@@ -117,7 +117,7 @@ public class Order {
 		return customer;
 	}
 
-	public Order setCustomer(final Customer customer) {
+	public Ordering setCustomer(final Customer customer) {
 		this.customer = customer;
 		return this;
 	}
