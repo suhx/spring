@@ -12,6 +12,8 @@
 		<commons.dbcp.version>1.4</commons.dbcp.version>
 		<junit.version>4.11</junit.version>
 		<log4j.version>1.2.17</log4j.version>
+		<jodatime.version>2.3</jodatime.version>
+		<jadira.version>2.0.1</jadira.version>
 	</properties>
 
 	<repositories>
@@ -122,6 +124,20 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-envers</artifactId>
 			<version>${hibernate.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<!-- Date and Time -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>${jodatime.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jadira.usertype</groupId>
+			<artifactId>usertype.jodatime</artifactId>
+			<version>${jadira.version}</version>
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>

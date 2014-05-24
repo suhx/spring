@@ -12,6 +12,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDate;
 import org.springframework.util.Assert;
 
 @Entity
@@ -27,6 +29,9 @@ public class Order {
 
 	@Column
 	private BigDecimal discount;
+
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+	private LocalDate date;
 
 	@ManyToOne
 	private Customer customer;
