@@ -7,4 +7,6 @@ public interface DataAccessService {
 	public Customer findCustomerById(Long id);
 
 	public Customer saveCustomer(Customer customer);
+
+	public Customer updateCustomer(Customer customer);
 }

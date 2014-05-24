@@ -27,4 +27,8 @@ public class DataAccessServiceImpl implements DataAccessService {
 	public Customer saveCustomer(final Customer customer) {
 		return customerRepository.save(customer);
 	}
+
+	public Customer updateCustomer(final Customer customer) {
+		return customerRepository.save(customer);
+	}
 }
