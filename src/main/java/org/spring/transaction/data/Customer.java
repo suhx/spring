@@ -40,7 +40,7 @@ public class Customer {
 	private List<Address> addresses = new ArrayList<Address>();
 
 	@Column(name = "rating")
-	private int rating;
+	private Integer rating;
 
 	/**
 	 * 
@@ -105,11 +105,11 @@ public class Customer {
 		return this;
 	}
 
-	public int getRating() {
+	public Integer getRating() {
 		return rating;
 	}
 
-	public Customer setRating(final int rating) {
+	public Customer setRating(final Integer rating) {
 		this.rating = rating;
 		return this;
 	}

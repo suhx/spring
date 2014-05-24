@@ -1,17 +1,47 @@
 package org.spring.transaction.data;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-public enum ProductCategory {
+import org.spring.transaction.enumeration.ProductCategoryEnum;
 
-	CLOTHES("clothes & more"), ELECTRONICS("electronics & stuff"), MISC("all the rest.");
+@Entity
+@Table(name = "product_category")
+public class ProductCategory {
 
-	private String descriptionValue;
+	@Id
+	@GeneratedValue
+	private Long id;
 
-	private ProductCategory(final String descriptionValue) {
-		this.descriptionValue = descriptionValue;
+	@Enumerated(EnumType.STRING)
+	private ProductCategoryEnum category;
+
+	protected ProductCategory() {
 	}
 
-	public String getDescriptionValue() {
-		return this.descriptionValue;
+	public ProductCategory(final ProductCategoryEnum category) {
+		this.category = category;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public ProductCategory setId(final Long id) {
+		this.id = id;
+		return this;
+	}
+
+	public ProductCategoryEnum getName() {
+		return category;
+	}
+
+	public ProductCategory setCategory(final ProductCategoryEnum category) {
+		this.category = category;
+		return this;
 	}
 }
