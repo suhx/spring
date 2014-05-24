@@ -1,5 +1,6 @@
 package org.spring.transaction.data;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -18,6 +19,7 @@ public class ProductCategory {
 	private Long id;
 
 	@Enumerated(EnumType.STRING)
+	@Column(unique = true)
 	private ProductCategoryEnum category;
 
 	protected ProductCategory() {

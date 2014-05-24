@@ -14,6 +14,7 @@ import org.spring.transaction.data.ProductCategory;
 import org.spring.transaction.repository.CustomerRepository;
 import org.spring.transaction.repository.ItemRepository;
 import org.spring.transaction.repository.OrderingRepository;
+import org.spring.transaction.repository.ProductCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -34,6 +35,9 @@ public class DataAccessServiceImpl implements DataAccessService {
 
 	@Autowired
 	private ItemRepository itemRepository;
+
+	@Autowired
+	private ProductCategoryRepository productCategoryRepository;
 
 	/**
 	 * Customer Queries
@@ -105,5 +109,14 @@ public class DataAccessServiceImpl implements DataAccessService {
 	@Override
 	public List<Item> findItemByShortDescriptionContaining(final String shortDescription) {
 		return itemRepository.findByShortDescriptionContaining(shortDescription);
+	}
+
+	/**
+	 * ProductCategory Queries
+	 */
+
+	@Override
+	public ProductCategory saveProductCategory(final ProductCategory category) {
+		return productCategoryRepository.save(category);
 	}
 }

@@ -8,6 +8,8 @@ import org.junit.runner.RunWith;
 import org.spring.transaction.data.Address;
 import org.spring.transaction.data.Customer;
 import org.spring.transaction.data.MailAddress;
+import org.spring.transaction.data.ProductCategory;
+import org.spring.transaction.enumeration.ProductCategoryEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -16,27 +18,42 @@ import org.springframework.util.Assert;
 @ContextConfiguration(locations = { "classpath:spring/applicationContext.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class DataAccessServiceTest {
+
 	@Autowired
 	private DataAccessService dataAccessService;
 
+	private String mailAddressString = "test@test.de";
+	private String mailAddressString1 = "test1@test1.de";
 	private String firstName = "firstName";
 	private String firstName1 = "firstName1";
 	private String lastName = "lastName";
 	private Date birthDate = new Date();
-	private MailAddress mailAddress = new MailAddress("test@test.de");
-	private MailAddress mailAddress1 = new MailAddress("test1@test1.de");
 	private Integer rating = 8;
-	private Address address = new Address("street", 8, "zip", "city", "country");
-	private Address address1 = new Address("street", 9, "zip", "city", "country");
+	private Address address;
+	private Address address1;
+	private MailAddress mailAddress;
+	private MailAddress mailAddress1;
 	private Customer customer;
 	private Customer customer1;
+	private ProductCategory category;
+	private ProductCategoryEnum categoryEnumClothes;
+	private ProductCategoryEnum categoryEnumMisc;
+	private ProductCategoryEnum categoryEnumElectronis;
 
 	@Before
 	public void beforeClass() {
+		this.mailAddress = new MailAddress(mailAddressString);
+		this.mailAddress1 = new MailAddress(mailAddressString1);
+		this.address = new Address("street", 8, "zip", "city", "country");
+		this.address1 = new Address("street", 9, "zip", "city", "country");
 		this.customer = new Customer(firstName, lastName).setBirthDate(birthDate).add(address).add(address1)
 				.setMailAddress(mailAddress).setRating(rating);
 		this.customer1 = new Customer(firstName, lastName).setBirthDate(birthDate).add(address)
 				.setMailAddress(mailAddress1).setRating(rating);
+		this.categoryEnumClothes = ProductCategoryEnum.CLOTHES;
+		this.categoryEnumElectronis = ProductCategoryEnum.ELECTRONICS;
+		this.categoryEnumMisc = ProductCategoryEnum.MISC;
+		this.category = new ProductCategory(categoryEnumClothes);
 	}
 
 	@Test
@@ -55,6 +72,11 @@ public class DataAccessServiceTest {
 		Customer foundCustomer = dataAccessService.findCustomerById(updatedCustomer.getId());
 		Assert.isTrue(foundCustomer.getFirstName().equals(updatedCustomer.getFirstName()));
 		Assert.isTrue(savedCustomer.getId().equals(foundCustomer.getId()));
+	}
+
+	@Test
+	public void testSaveProductCategory() {
+		ProductCategory savedCategory = dataAccessService.saveProductCategory(category);
 	}
 	//
 	// @Test

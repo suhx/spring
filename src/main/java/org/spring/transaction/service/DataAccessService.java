@@ -47,4 +47,10 @@ public interface DataAccessService {
 
 	public List<Item> findItemByShortDescriptionContaining(String shortDescription);
 
+	/**
+	 * ProductCategory
+	 */
+
+	public ProductCategory saveProductCategory(ProductCategory category);
+
 }
