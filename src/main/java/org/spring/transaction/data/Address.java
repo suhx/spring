@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import org.springframework.util.Assert;
 
 @Entity
-@Table(name = "adress")
+@Table(name = "address")
 public class Address {
 
 	@Id

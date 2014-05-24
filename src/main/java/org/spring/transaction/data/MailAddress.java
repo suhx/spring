@@ -22,7 +22,7 @@ public class MailAddress {
 
 	private static final Pattern PATTERN = Pattern.compile(EMAIL_REGEX);
 
-	@Column
+	@Column(unique = true)
 	private String value;
 
 	public MailAddress(final String mailAddress) {

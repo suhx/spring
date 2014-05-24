@@ -24,6 +24,7 @@ public class DataAccessServiceTest {
 	private String lastName = "lastName";
 	private Date birthDate = new Date();
 	private MailAddress mailAddress = new MailAddress("test@test.de");
+	private MailAddress mailAddress1 = new MailAddress("test1@test1.de");
 	private int rating = 8;
 	private Address address = new Address("street", 8, "zip", "city", "country");
 	private Address address1 = new Address("street", 9, "zip", "city", "country");
@@ -41,7 +42,7 @@ public class DataAccessServiceTest {
 	@Test
 	public void updateCustomerTest() {
 		Customer customer = new Customer(firstName, lastName).setBirthDate(birthDate).add(address)
-				.setMailAddress(mailAddress).setRating(rating);
+				.setMailAddress(mailAddress1).setRating(rating);
 		Customer savedCustomer = dataAccessService.saveCustomer(customer);
 		savedCustomer.setFirstName(firstName1);
 		Customer updatedCustomer = dataAccessService.updateCustomer(savedCustomer);
