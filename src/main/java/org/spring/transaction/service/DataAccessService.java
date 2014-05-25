@@ -19,6 +19,11 @@ public interface DataAccessService {
 
 	public Customer saveCustomer(Customer customer);
 
+	/**
+	 * Automatische Kundensuche nach gekauftem Artikel ging nicht. Dazu wurde
+	 * einen Logik Methode implementiert
+	 * 
+	 */
 	// public List<Customer> findCustomersByBoughtItem(Item item);
 
 	public void deleteCustomer(Customer customer);

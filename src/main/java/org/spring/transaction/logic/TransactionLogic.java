@@ -19,6 +19,14 @@ public class TransactionLogic {
 	@Autowired
 	DataAccessService dataAccessService;
 
+	/**
+	 * Gibt alle Bestellungen aus, die den gewünschten Artikel beinhalten. Es
+	 * werden die Kunden der Bestellung zurückgegeben
+	 * 
+	 * @param item
+	 * @return List<Customer>
+	 * 
+	 */
 	public List<Customer> getCustomersByBoughtItem(final Item item) {
 		List<Item> itemList = Arrays.asList(item);
 		List<Ordering> orderingList = dataAccessService.findOrderingsByItems(itemList);
@@ -31,6 +39,17 @@ public class TransactionLogic {
 		return customerList;
 	}
 
+	/**
+	 * Summiert den Preis aller gekauften Items in einer Bestellung und schaut,
+	 * ob die Summe größer/kleiner als der angegebene Wert ist Gibt alle Kunden
+	 * zurück, die diese Bedingung erfüllen Implizit werden hier auch alle
+	 * Bestellungen mit einem bestimmten Volumen ausgegeben bzw. berechnet.
+	 * 
+	 * @param salesVolume
+	 * @param orderEnum
+	 * @return List<Customer>
+	 * 
+	 */
 	public List<Customer> getCustomersBySalesVolume(final BigDecimal salesVolume, final OrderEnum orderEnum) {
 		List<Customer> customerList = new ArrayList<Customer>();
 		List<Ordering> orderingList = dataAccessService.findOrderings();

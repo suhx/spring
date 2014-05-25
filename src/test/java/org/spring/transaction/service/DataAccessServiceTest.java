@@ -1,7 +1,5 @@
 package org.spring.transaction.service;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.List;
 
 import org.joda.time.LocalDate;
@@ -9,11 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.spring.transaction.data.Customer;
-import org.spring.transaction.data.Item;
 import org.spring.transaction.data.MailAddress;
 import org.spring.transaction.data.Ordering;
-import org.spring.transaction.data.ProductCategory;
-import org.spring.transaction.enumeration.ProductCategoryEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -33,17 +28,6 @@ public class DataAccessServiceTest {
 	private String mailAddressString;
 	private MailAddress mailAddress;
 	private Customer customer;
-	private Ordering ordering;
-	private List<Item> itemList;
-	private Item item;
-	private Item item1;
-	private ProductCategoryEnum categoryEnumClothes;
-	private ProductCategoryEnum categoryEnumMisc;
-	private ProductCategory category;
-	private ProductCategory category1;
-	private String shortDescription;
-	private String longDescription;
-	private BigDecimal price;
 
 	@Before
 	public void beforeTest() {
@@ -55,18 +39,6 @@ public class DataAccessServiceTest {
 		this.mailAddress = new MailAddress(this.mailAddressString);
 		this.customer = new Customer(this.firstName, this.lastName);
 		this.customer.setBirthDate(this.birthDate).setMailAddress(this.mailAddress);
-		this.categoryEnumClothes = ProductCategoryEnum.CLOTHES;
-		this.categoryEnumMisc = ProductCategoryEnum.MISC;
-		this.category = new ProductCategory(this.categoryEnumClothes);
-		this.category1 = new ProductCategory(this.categoryEnumMisc);
-		this.shortDescription = "shortDescription";
-		this.longDescription = "longDescription";
-		this.price = new BigDecimal(5.99);
-		this.item = new Item(this.category, this.shortDescription, this.longDescription, this.price);
-		this.item1 = new Item(this.category1, this.shortDescription + "1", this.longDescription + "1",
-				this.price.add(this.price));
-		this.itemList = Arrays.asList(this.item, this.item1);
-		this.ordering = new Ordering(this.customer, this.itemList);
 	}
 
 	@Test
