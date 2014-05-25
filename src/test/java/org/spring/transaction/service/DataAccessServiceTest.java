@@ -1,13 +1,15 @@
 package org.spring.transaction.service;
 
+import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 
 import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.spring.transaction.data.Address;
 import org.spring.transaction.data.Customer;
+import org.spring.transaction.data.Item;
 import org.spring.transaction.data.MailAddress;
 import org.spring.transaction.data.Ordering;
 import org.spring.transaction.data.ProductCategory;
@@ -24,102 +26,81 @@ public class DataAccessServiceTest {
 	@Autowired
 	private DataAccessService dataAccessService;
 
-	private String mailAddressString = "test@test.de";
-	private String mailAddressString1 = "test1@test1.de";
-	private String firstName = "firstName";
-	private String firstName1 = "firstName1";
-	private String lastName = "lastName";
-	private LocalDate birthDate = new LocalDate();
-	private Integer rating = 8;
-	private Address address;
-	private Address address1;
+	private String firstName;
+	private String firstName1;
+	private String lastName;
+	private LocalDate birthDate;
+	private String mailAddressString;
 	private MailAddress mailAddress;
-	private MailAddress mailAddress1;
 	private Customer customer;
-	private Customer customer1;
-	private ProductCategory category;
+	private Ordering ordering;
+	private List<Item> itemList;
+	private Item item;
+	private Item item1;
 	private ProductCategoryEnum categoryEnumClothes;
 	private ProductCategoryEnum categoryEnumMisc;
-	private ProductCategoryEnum categoryEnumElectronis;
+	private ProductCategory category;
+	private ProductCategory category1;
+	private String shortDescription;
+	private String longDescription;
+	private BigDecimal price;
 
 	@Before
 	public void beforeTest() {
-		this.mailAddress = new MailAddress(mailAddressString);
-		this.mailAddress1 = new MailAddress(mailAddressString1);
-		this.address = new Address("street", 8, "zip", "city", "country");
-		this.address1 = new Address("street", 9, "zip", "city", "country");
-		this.customer = new Customer(firstName, lastName).setBirthDate(birthDate).addAddress(address)
-				.addAddress(address1).setMailAddress(mailAddress).setRating(rating);
-		this.customer1 = new Customer(firstName, lastName).setBirthDate(birthDate).addAddress(address)
-				.setMailAddress(mailAddress1).setRating(rating);
+		this.firstName = "firstName";
+		this.firstName1 = "firstName1";
+		this.lastName = "lastName";
+		this.birthDate = new LocalDate("1970-01-01");
+		this.mailAddressString = "mail@mail.de";
+		this.mailAddress = new MailAddress(this.mailAddressString);
+		this.customer = new Customer(this.firstName, this.lastName);
+		this.customer.setBirthDate(this.birthDate).setMailAddress(this.mailAddress);
 		this.categoryEnumClothes = ProductCategoryEnum.CLOTHES;
-		this.categoryEnumElectronis = ProductCategoryEnum.ELECTRONICS;
 		this.categoryEnumMisc = ProductCategoryEnum.MISC;
-		this.category = new ProductCategory(categoryEnumClothes);
+		this.category = new ProductCategory(this.categoryEnumClothes);
+		this.category1 = new ProductCategory(this.categoryEnumMisc);
+		this.shortDescription = "shortDescription";
+		this.longDescription = "longDescription";
+		this.price = new BigDecimal(5.99);
+		this.item = new Item(this.category, this.shortDescription, this.longDescription, this.price);
+		this.item1 = new Item(this.category1, this.shortDescription + "1", this.longDescription + "1",
+				this.price.add(this.price));
+		this.itemList = Arrays.asList(this.item, this.item1);
+		this.ordering = new Ordering(this.customer, this.itemList);
 	}
 
 	@Test
 	public void testSaveCustomer() {
+		Assert.isNull(this.customer.getId());
 		Customer savedCustomer = dataAccessService.saveCustomer(this.customer);
-		Customer foundCustomer = dataAccessService.findCustomerById(savedCustomer.getId());
-		Assert.isTrue(foundCustomer.getMailAddress().equals(customer.getMailAddress()));
-		Assert.isTrue(foundCustomer.getAddressList().size() == 2);
+		Assert.isTrue(savedCustomer.getFirstName().equals(this.customer.getFirstName()));
+		Assert.isTrue(savedCustomer.getLastName().equals(this.customer.getLastName()));
+		Assert.isTrue(savedCustomer.getBirthDate().equals(this.customer.getBirthDate()));
+		Assert.isTrue(savedCustomer.getMailAddress().equals(this.customer.getMailAddress()));
+		dataAccessService.deleteCustomer(this.customer);
 	}
 
 	@Test
 	public void testUpdateCustomer() {
-		Customer savedCustomer = dataAccessService.saveCustomer(this.customer1);
+		Assert.isNull(this.customer.getId());
+		Customer savedCustomer = dataAccessService.saveCustomer(this.customer);
+		Assert.isTrue(savedCustomer.getId() != null);
+		Assert.isTrue(savedCustomer.getFirstName().equals(this.customer.getFirstName()));
 		savedCustomer.setFirstName(firstName1);
-		Customer updatedCustomer = dataAccessService.updateCustomer(savedCustomer);
-		Customer foundCustomer = dataAccessService.findCustomerById(updatedCustomer.getId());
-		Assert.isTrue(foundCustomer.getFirstName().equals(updatedCustomer.getFirstName()));
-		Assert.isTrue(savedCustomer.getId().equals(foundCustomer.getId()));
+		dataAccessService.saveCustomer(savedCustomer);
+		Customer updatedCustomer = dataAccessService.findCustomerById(savedCustomer.getId());
+		Assert.isTrue(updatedCustomer.getId().equals(savedCustomer.getId()));
+		Assert.isTrue(updatedCustomer.getFirstName().equals(this.firstName1));
+		dataAccessService.deleteCustomer(updatedCustomer);
 	}
 
 	@Test
 	public void testFindOrderingsByCustomer() {
-		Customer foundCustomer = dataAccessService.findCustomerById(2L);
+		Customer foundCustomer = dataAccessService.findCustomerById(1L);
 		List<Ordering> orderingList = dataAccessService.findOrderingsByCustomer(foundCustomer);
-		Assert.isTrue(orderingList.size() == 3);
+		Assert.isTrue(orderingList.size() > 0);
+		for (Ordering ordering : orderingList) {
+			Assert.isTrue(ordering.getCustomer().getId().equals(foundCustomer.getId()));
+		}
 	}
-
-	// @Test
-	// public void testFindOrderingByDateLessThan() {
-	// dataAccessService
-	// }
-	//
-	// @Test
-	// public void testFindOrderingByDateGreaterThan() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test
-	// public void testFindOrderingByDate() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test
-	// public void testFindItemByCategory() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test
-	// public void testFindItemByPriceGreaterThan() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test
-	// public void testFindItemByPriceLessThan() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test
-	// public void testFindItemByPrice() {
-	// fail("Not yet implemented");
-	// }
-	//
-	// @Test
-	// public void testFindItemByShortDescriptionContaining() {
-	// fail("Not yet implemented");
-	// }
 }

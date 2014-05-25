@@ -14,5 +14,4 @@ public interface CustomerRepository extends CrudRepository<Customer, Long> {
 	List<Customer> findByRating(Integer rating);
 
 	List<Customer> findByRatingLessThan(Integer rating);
-
 }

@@ -53,9 +53,19 @@ public class DataAccessServiceImpl implements DataAccessService {
 		return customerRepository.save(customer);
 	}
 
+	// @Override
+	// public List<Customer> findCustomersByBoughtItem(final Item item) {
+	// List<Item> itemList = Arrays.asList(item);
+	// TypedQuery<Customer> query = entityManager.createQuery(
+	// "select distinct o.customer from Ordering o where o.items = ?",
+	// Customer.class);
+	// query.setParameter(1, itemList);
+	// return query.getResultList();
+	// }
+
 	@Override
-	public Customer updateCustomer(final Customer customer) {
-		return customerRepository.save(customer);
+	public void deleteCustomer(final Customer customer) {
+		customerRepository.delete(customer);
 	}
 
 	/**
@@ -80,6 +90,21 @@ public class DataAccessServiceImpl implements DataAccessService {
 	@Override
 	public List<Ordering> findOrderingsByOrderDate(final LocalDate orderDate) {
 		return orderingRepository.findByOrderDate(orderDate);
+	}
+
+	@Override
+	public List<Ordering> findOrderingsByItems(final List<Item> itemList) {
+		return orderingRepository.findByItems(itemList);
+	}
+
+	@Override
+	public Ordering saveOrdering(final Ordering ordering) {
+		return orderingRepository.save(ordering);
+	}
+
+	@Override
+	public List<Ordering> findOrderings() {
+		return (List<Ordering>) orderingRepository.findAll();
 	}
 
 	/**

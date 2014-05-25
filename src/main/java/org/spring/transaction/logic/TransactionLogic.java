@@ -1,9 +1,17 @@
 package org.spring.transaction.logic;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.spring.transaction.data.Customer;
+import org.spring.transaction.data.Item;
+import org.spring.transaction.data.Ordering;
+import org.spring.transaction.enumeration.OrderEnum;
 import org.spring.transaction.service.DataAccessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class TransactionLogic {
@@ -11,12 +19,33 @@ public class TransactionLogic {
 	@Autowired
 	DataAccessService dataAccessService;
 
-	@Transactional
-	public void saveObjects(final boolean success) {
-
+	public List<Customer> getCustomersByBoughtItem(final Item item) {
+		List<Item> itemList = Arrays.asList(item);
+		List<Ordering> orderingList = dataAccessService.findOrderingsByItems(itemList);
+		List<Customer> customerList = new ArrayList<Customer>();
+		if (orderingList.size() > 0) {
+			for (Ordering ordering : orderingList) {
+				customerList.add(ordering.getCustomer());
+			}
+		}
+		return customerList;
 	}
 
-	public void saveObjects() {
-
+	public List<Customer> getCustomersBySalesVolume(final BigDecimal salesVolume, final OrderEnum orderEnum) {
+		List<Customer> customerList = new ArrayList<Customer>();
+		List<Ordering> orderingList = dataAccessService.findOrderings();
+		for (Ordering ordering : orderingList) {
+			BigDecimal sum = new BigDecimal(0);
+			for (Item item : ordering.getItems()) {
+				sum = sum.add(item.getPrice());
+			}
+			if (orderEnum.getOrder().equals("greater") && sum.compareTo(salesVolume) == 1) {
+				customerList.add(ordering.getCustomer());
+			}
+			if (orderEnum.getOrder().equals("lower") && sum.compareTo(salesVolume) == -1) {
+				customerList.add(ordering.getCustomer());
+			}
+		}
+		return customerList;
 	}
 }

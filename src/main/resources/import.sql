@@ -36,7 +36,7 @@ INSERT INTO `transaction`.`item` (`id`, `long_description`, `price`, `short_desc
 INSERT INTO `transaction`.`item` (`id`, `long_description`, `price`, `short_description`, `category_id`) VALUES (5, 'longDescription', '5', 'shortDescription', 3);
 
 -- Ordering Item
-INSERT INTO `transaction`.`ordering_item` (`ordering_id`, `items_id`) VALUES (1, 1);
+INSERT INTO `transaction`.`ordering_item` (`ordering_id`, `items_id`) VALUES (1, 5);
 INSERT INTO `transaction`.`ordering_item` (`ordering_id`, `items_id`) VALUES (1, 2);
 INSERT INTO `transaction`.`ordering_item` (`ordering_id`, `items_id`) VALUES (1, 4);
 INSERT INTO `transaction`.`ordering_item` (`ordering_id`, `items_id`) VALUES (2, 3);

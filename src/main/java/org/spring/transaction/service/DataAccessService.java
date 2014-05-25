@@ -19,11 +19,15 @@ public interface DataAccessService {
 
 	public Customer saveCustomer(Customer customer);
 
-	public Customer updateCustomer(Customer customer);
+	// public List<Customer> findCustomersByBoughtItem(Item item);
+
+	public void deleteCustomer(Customer customer);
 
 	/**
 	 * Ordering
 	 */
+
+	public Ordering saveOrdering(Ordering ordering);
 
 	public List<Ordering> findOrderingsByOrderDateLessThan(LocalDate orderDate);
 
@@ -32,6 +36,10 @@ public interface DataAccessService {
 	public List<Ordering> findOrderingsByOrderDate(LocalDate orderDate);
 
 	public List<Ordering> findOrderingsByCustomer(Customer customer);
+
+	public List<Ordering> findOrderingsByItems(List<Item> itemList);
+
+	public List<Ordering> findOrderings();
 
 	/**
 	 * Item
