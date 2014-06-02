@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.spring.transaction.data.Customer;
@@ -12,6 +13,7 @@ import org.spring.transaction.data.ProductCategory;
 import org.spring.transaction.enumeration.OrderEnum;
 import org.spring.transaction.enumeration.ProductCategoryEnum;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
@@ -44,6 +46,7 @@ public class TransactionLogicTest {
 		this.orderEnum = OrderEnum.GREATER;
 	}
 
+	@Ignore
 	@Test
 	public void testGetCustomersByBoughtItem() {
 		this.item.setId(1l);
@@ -52,9 +55,15 @@ public class TransactionLogicTest {
 		Assert.isTrue(customerList.get(0).getId().equals(2L));
 	}
 
+	@Ignore
 	@Test
 	public void testGetCustomersBySalesVolume() {
 		List<Customer> customerList = transactionLogic.getCustomersBySalesVolume(this.salesVolume, this.orderEnum);
 		Assert.isTrue(customerList.size() == 2);
+	}
+
+	@Test(expected = DataIntegrityViolationException.class)
+	public void testTransaction() {
+		transactionLogic.transaction();
 	}
 }

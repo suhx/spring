@@ -15,7 +15,7 @@ public interface DataAccessService {
 	 * Customer
 	 */
 
-	public Customer findCustomerById(Long id);
+	public Customer findCustomerById(Long customerId);
 
 	public Customer saveCustomer(Customer customer);
 
@@ -50,6 +50,8 @@ public interface DataAccessService {
 	 * Item
 	 */
 
+	public Item findItemById(Long itemId);
+
 	public List<Item> findItemsByCategory(ProductCategory category);
 
 	public List<Item> findItemsByPriceGreaterThan(BigDecimal price);
@@ -60,12 +62,14 @@ public interface DataAccessService {
 
 	public List<Item> findItemsByShortDescriptionContaining(String shortDescription);
 
+	public void deleteItem(Item item);
+
 	/**
 	 * ProductCategory
 	 */
 
 	public ProductCategory saveProductCategory(ProductCategory category);
 
-	public ProductCategory findProductCategoryById(Long id);
+	public ProductCategory findProductCategoryById(Long categoryId);
 
 }

@@ -44,8 +44,8 @@ public class DataAccessServiceImpl implements DataAccessService {
 	 */
 
 	@Override
-	public Customer findCustomerById(final Long id) {
-		return customerRepository.findById(id);
+	public Customer findCustomerById(final Long customerId) {
+		return customerRepository.findById(customerId);
 	}
 
 	@Override
@@ -136,6 +136,16 @@ public class DataAccessServiceImpl implements DataAccessService {
 		return itemRepository.findByShortDescriptionContaining(shortDescription);
 	}
 
+	@Override
+	public Item findItemById(final Long itemId) {
+		return itemRepository.findOne(itemId);
+	}
+
+	@Override
+	public void deleteItem(final Item item) {
+		itemRepository.delete(item);
+	}
+
 	/**
 	 * ProductCategory Queries
 	 */
@@ -146,7 +156,7 @@ public class DataAccessServiceImpl implements DataAccessService {
 	}
 
 	@Override
-	public ProductCategory findProductCategoryById(final Long id) {
-		return productCategoryRepository.findById(id);
+	public ProductCategory findProductCategoryById(final Long categoryId) {
+		return productCategoryRepository.findById(categoryId);
 	}
 }

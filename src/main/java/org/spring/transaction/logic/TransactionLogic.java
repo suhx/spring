@@ -7,11 +7,13 @@ import java.util.List;
 
 import org.spring.transaction.data.Customer;
 import org.spring.transaction.data.Item;
+import org.spring.transaction.data.MailAddress;
 import org.spring.transaction.data.Ordering;
 import org.spring.transaction.enumeration.OrderEnum;
 import org.spring.transaction.service.DataAccessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class TransactionLogic {
@@ -66,5 +68,18 @@ public class TransactionLogic {
 			}
 		}
 		return customerList;
+	}
+
+	@Transactional
+	public void transaction() {
+		MailAddress mailAddress = new MailAddress("test@test.com");
+		Item item = dataAccessService.findItemById(6L);
+		Customer customer = new Customer("first", "last");
+		customer.setMailAddress(mailAddress);
+		Customer customer2 = new Customer("first1", "last2");
+		customer2.setMailAddress(mailAddress);
+		customer = dataAccessService.saveCustomer(customer);
+		dataAccessService.deleteItem(item);
+		customer2 = dataAccessService.saveCustomer(customer2);
 	}
 }

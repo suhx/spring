@@ -18,7 +18,7 @@ public class Item {
 	@GeneratedValue
 	private Long id;
 
-	@ManyToOne(optional = false, cascade = CascadeType.ALL)
+	@ManyToOne(optional = false, cascade = CascadeType.DETACH)
 	private ProductCategory category;
 
 	@Column(name = "short_description", nullable = false)
