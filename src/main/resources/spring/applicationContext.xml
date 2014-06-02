@@ -24,8 +24,7 @@
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" p:database="MYSQL"
 				p:showSql="true" p:databasePlatform="org.hibernate.dialect.MySQL5Dialect"/>
-		<!-- the 'database' parameter refers to the database dialect being used. By default, Hibernate will use a 'HSQL' dialect 
-			because 'jpa.database' has been set to 'HSQL' inside file spring/data-access.properties -->
+		<!-- the 'database' parameter refers to the database dialect being used. By default, Hibernate will use a 'HSQL' dialect -->
 		</property>
 		<!-- gDickens: BOTH Persistence Unit and Packages to Scan are NOT compatible, persistenceUnit will win -->
 		<property name="persistenceUnitName" value="transaction" />									
